@@ -10,7 +10,7 @@
         .odtu-red { background-color: #D32F2F; }
         .odtu-text-red { color: #D32F2F; }
         
-        /* İstediğin METU BOT Yazı Stili */
+        /* METU BOT Yazı Stili - İkisi de tam beyaz */
         .nav-logo-style {
             display: flex;
             align-items: center;
@@ -19,15 +19,19 @@
             font-size: 1.8rem;
             letter-spacing: .08em;
             text-transform: uppercase;
+            color: #ffffff; /* Her iki kelime için varsayılan renk */
         }
 
-        .nav-logo-style .white-part {
-            color: #ffffff; /* METU kısmı tekrar beyaz */
-        }
-
-        .nav-logo-style .red-part {
-            color: #ffffff; /* Kırmızı header üzerinde beyaz uyumu için */
-            opacity: 0.85;
+        /* Alt yazı (AI Campus Assistant) için ortalama ayarı */
+        .assistant-tag {
+            text-align: center; /* Yazıyı kendi içinde ortalar */
+            width: 100%; /* Kapsayıcı genişliğinde ortalanmasını sağlar */
+            font-size: 10px;
+            font-style: italic;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-top: 2px;
         }
     </style>
 </head>
@@ -39,12 +43,14 @@
                 <img src="odtu-amblem.png" alt="METU Logo" class="w-full h-full object-contain transform scale-110">
             </div>
             
-            <div class="flex flex-col">
+            <div class="flex flex-col items-center">
                 <div class="nav-logo-style">
-                    <span class="white-part">METU</span>
-                    <span class="red-part" style="margin-left: 8px;">BOT</span>
+                    <span>METU</span>
+                    <span style="margin-left: 8px;">BOT</span>
                 </div>
-                <span class="text-[10px] italic opacity-50 uppercase tracking-[0.5em] mt-1 ml-1">AI Campus Assistant</span>
+                <div class="assistant-tag">
+                    AI Campus Assistant
+                </div>
             </div>
         </div>
         
@@ -103,7 +109,6 @@
             msgDiv.innerText = text;
             wrapper.appendChild(msgDiv);
             chatWindow.appendChild(wrapper);
-            
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
