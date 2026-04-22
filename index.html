@@ -1,43 +1,45 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Soru-Cevap Uygulaması</title>
+    <title>METUbot - Kampüs Asistanı</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Animasyonlar ve özel scroll bar için */
-        .chat-container::-webkit-scrollbar {
-            width: 6px;
-        }
-        .chat-container::-webkit-scrollbar-thumb {
-            background-color: #e5e7eb;
-            border-radius: 10px;
-        }
+        .chat-container::-webkit-scrollbar { width: 5px; }
+        .chat-container::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
+        .odtu-red { background-color: #D32F2F; }
+        .odtu-text { color: #D32F2F; }
     </style>
 </head>
-<body class="bg-slate-50 h-screen flex flex-col">
+<body class="bg-gray-50 h-screen flex flex-col font-sans">
 
-    <header class="bg-white border-b p-4 shadow-sm">
-        <h1 class="text-xl font-bold text-center text-blue-600">AI Asistanım</h1>
+    <header class="odtu-red text-white p-4 shadow-lg flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-white p-1 rounded-full w-8 h-8 flex items-center justify-center">
+                <span class="odtu-text font-black text-xs">METU</span>
+            </div>
+            <h1 class="text-xl font-bold tracking-tight">METUbot</h1>
+        </div>
+        <span class="text-xs opacity-80 uppercase font-medium">Kampüs Asistanı</span>
     </header>
 
     <main id="chat-window" class="flex-1 overflow-y-auto p-4 space-y-4 chat-container">
         <div class="flex justify-start">
-            <div class="bg-white border text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-sm">
-                Merhaba! Sana bugün nasıl yardımcı olabilirim?
+            <div class="bg-white border-l-4 border-[#D32F2F] text-gray-800 p-4 rounded-lg rounded-tl-none max-w-[85%] shadow-sm">
+                <p class="font-semibold odtu-text mb-1">Merhaba Hocam!</p>
+                <p class="text-sm">Ben METUbot. Bölüm yönetmelikleri, kampüs duyuruları veya IE102 gibi dersler hakkında sana yardımcı olmak için buradayım. Ne sormak istersin?</p>
             </div>
         </div>
     </main>
 
-    <footer class="p-4 bg-white border-t">
+    <footer class="p-4 bg-white border-t shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
         <div class="max-w-4xl mx-auto flex gap-2">
             <input type="text" id="user-input" 
-                   placeholder="Sorunuzu buraya yazın..." 
-                   class="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                   placeholder="Yönetmelik veya ders sor..." 
+                   class="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#D32F2F] focus:border-transparent transition-all">
             <button onclick="sendMessage()" 
-                    class="bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition-colors">
+                    class="odtu-red text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 active:scale-95 transition-all shadow-md">
                 Gönder
             </button>
         </div>
@@ -51,14 +53,20 @@
             const text = userInput.value.trim();
             if (text === "") return;
 
-            // Kullanıcı mesajını ekle
             addMessage(text, 'user');
             userInput.value = "";
 
-            // Yapay zeka yanıt simülasyonu (Buraya API bağlayabilirsin)
+            // Simüle edilmiş cevap (Daha sonra AI buraya bağlanacak)
             setTimeout(() => {
-                addMessage("Bu harika bir soru! Üzerinde çalışıyorum...", 'ai');
-            }, 800);
+                const responses = [
+                    "Bunu hemen araştırıyorum...",
+                    "Yönetmeliğe göre bu durum şu şekilde açıklanmıştır...",
+                    "IE102 dersi ile ilgili detayları veritabanımda kontrol ediyorum.",
+                    "Anladım, bu konuda sana nasıl yardımcı olabilirim?"
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse, 'ai');
+            }, 1000);
         }
 
         function addMessage(text, sender) {
@@ -67,23 +75,19 @@
             
             const msgDiv = document.createElement('div');
             msgDiv.className = sender === 'user' 
-                ? 'bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[80%] shadow-md' 
-                : 'bg-white border text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-sm';
+                ? 'bg-gray-700 text-white p-3 rounded-2xl rounded-tr-none max-w-[80%] shadow-md' 
+                : 'bg-white border-l-4 border-[#D32F2F] text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-sm';
             
             msgDiv.innerText = text;
             wrapper.appendChild(msgDiv);
             chatWindow.appendChild(wrapper);
-
-            // Otomatik aşağı kaydır
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        // Enter tuşu ile gönderim desteği
-        userInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
+        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
     </script>
 </body>
 </html>
+
+
+        
