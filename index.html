@@ -6,22 +6,29 @@
     <title>METUbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Standart Tailwind renkleri yerine ODTÜ Kırmızısını (D32F2F) ekliyoruz */
+        .odtu-red { background-color: #D32F2F; }
+        .odtu-text-red { color: #D32F2F; }
+        
         .chat-container::-webkit-scrollbar { width: 5px; }
         .chat-container::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
-        .odtu-red { background-color: #D32F2F; }
-        .odtu-text { color: #D32F2F; }
     </style>
 </head>
-<body class="bg-gray-50 h-screen flex flex-col font-sans">
+<body class="bg-gray-50 h-screen flex flex-col font-sans text-gray-900">
 
     <header class="odtu-red text-white p-4 shadow-lg flex items-center justify-between">
         <div class="flex items-center gap-3">
             <div class="bg-white p-1 rounded-full w-12 h-12 flex items-center justify-center shadow-md">
-                <svg viewBox="0 0 100 100" class="w-10 h-10 text-[#D32F2F]">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4.5"/>
-                    <path d="M50 5 A45 45 0 0 0 50 95" fill="none" stroke="currentColor" stroke-width="4.5"/>
-                    <path d="M50 20 A30 30 0 0 1 50 80" fill="none" stroke="currentColor" stroke-width="4.5"/>
-                    <line x1="50" y1="5" x2="50" y2="95" stroke="currentColor" stroke-width="4.5"/>
+                <svg viewBox="0 0 100 100" class="w-10 h-10 odtu-text-red" stroke-width="3" stroke="currentColor">
+                    <path d="M 50 10 A 40 40 0 0 0 50 90 A 30 30 0 0 1 50 10 Z" fill="currentColor" stroke="none" />
+                    <path d="M 50 10 A 40 40 0 0 0 50 90 Z" fill="none" />
+                    
+                    <path d="M 50 20 A 30 30 0 0 1 50 80 A 40 40 0 0 0 50 20 Z" fill="currentColor" stroke="none" />
+                    <path d="M 50 20 A 40 40 0 0 1 50 80 Z" fill="none" />
+                    
+                    <line x1="50" y1="5" x2="50" y2="95" />
+                    
+                    <circle cx="50" cy="50" r="45" fill="none" stroke-width="2.5"/>
                 </svg>
             </div>
             <h1 class="text-2xl font-extrabold tracking-tight">METUbot</h1>
@@ -34,8 +41,8 @@
     <main id="chat-window" class="flex-1 overflow-y-auto p-4 space-y-4 chat-container">
         <div class="flex justify-start">
             <div class="bg-white border-l-4 border-[#D32F2F] text-gray-800 p-4 rounded-lg rounded-tl-none max-w-[85%] shadow-sm">
-                <p class="font-semibold odtu-text mb-1">Merhaba!</p>
-                <p class="text-sm text-gray-600">Sana kampüs yaşamı ve okul yönetmelikleri hakkında nasıl yardımcı olabilirim?</p>
+                <p class="font-semibold odtu-text-red mb-1">Merhaba!</p>
+                <p class="text-sm text-gray-600">Sana kampüs yaşamı, dersler ve okul yönetmelikleri hakkında nasıl yardımcı olabilirim?</p>
             </div>
         </div>
     </main>
@@ -64,7 +71,14 @@
             userInput.value = "";
 
             setTimeout(() => {
-                addMessage("Bu konu hakkında hemen araştırma yapıyorum...", 'ai');
+                const aiResponses = [
+                    "Bunu hemen araştırma yapıyorum...",
+                    "Yönetmeliğe göre bu durum şu şekilde açıklanmıştır...",
+                    "Yapay zeka modelim bu konudaki verileri kontrol ediyor.",
+                    "Anladım, sana bu konuda nasıl yardımcı olabilirim?"
+                ];
+                const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+                addMessage(randomResponse, 'ai');
             }, 1000);
         }
 
@@ -87,6 +101,7 @@
     </script>
 </body>
 </html>
+
 
 
 
