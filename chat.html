@@ -21,12 +21,13 @@
             text-transform: uppercase;
         }
 
-        .nav-logo-style .black-part {
-            color: #111; /* METU kısmı siyah */
+        .nav-logo-style .white-part {
+            color: #ffffff; /* METU kısmı tekrar beyaz */
         }
 
         .nav-logo-style .red-part {
-            color: #ffffff; /* Kırmızı header üzerinde beyaz daha iyi durur, ama istersen #D93025 yapabilirsin */
+            color: #ffffff; /* Kırmızı header üzerinde beyaz uyumu için */
+            opacity: 0.85;
         }
     </style>
 </head>
@@ -40,7 +41,7 @@
             
             <div class="flex flex-col">
                 <div class="nav-logo-style">
-                    <span class="black-part">METU</span>
+                    <span class="white-part">METU</span>
                     <span class="red-part" style="margin-left: 8px;">BOT</span>
                 </div>
                 <span class="text-[10px] italic opacity-50 uppercase tracking-[0.5em] mt-1 ml-1">AI Campus Assistant</span>
@@ -102,6 +103,7 @@
             msgDiv.innerText = text;
             wrapper.appendChild(msgDiv);
             chatWindow.appendChild(wrapper);
+            
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
