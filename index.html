@@ -1,164 +1,244 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>METUbot — ODTÜ'nün Akıllı Kampüs Asistanı</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-    :root {
-        --odtu-red: #D32F2F;
-        --dark: #121212;
-    }
-    body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: var(--dark); }
-    .heading-font { font-family: 'Syne', sans-serif; }
-    
-    /* Smooth Glassmorphism Effects */
-    .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.05); }
-    
-    /* Premium Gradient for Hero */
-    .hero-gradient {
-        background: radial-gradient(circle at top right, rgba(211, 47, 47, 0.08), transparent),
-                    radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.02), transparent);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METUbot — ODTÜ Akıllı Kampüs Asistanı</title>
+    <style>
+        /* 1. GENEL TASARIM VE DEĞİŞKENLER */
+        :root {
+            --odtu-red: #D32F2F;
+            --dark-gray: #1a1a1a;
+            --light-gray: #f9f9f9;
+            --accent-red: #b71c1c;
+            --transition: all 0.4s ease;
+        }
 
-    /* Animated Button */
-    .btn-premium {
-        background: var(--odtu-red);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 10px 20px -10px rgba(211, 47, 47, 0.4);
-    }
-    .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 20px 30px -10px rgba(211, 47, 47, 0.4); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: var(--dark-gray); 
+            background-color: #ffffff;
+        }
 
-    /* Floating Animation for Mockup */
-    .float { animation: floating 6s ease-in-out infinite; }
-    @keyframes floating {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(1deg); }
-    }
-</style>
+        /* 2. NAVİGASYON (DETAYLI) */
+        header {
+            background: white;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 26px; font-weight: 800; color: var(--dark-gray); text-transform: uppercase; letter-spacing: -1px; }
+        .logo span { color: var(--odtu-red); }
+
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a { text-decoration: none; color: var(--dark-gray); font-weight: 600; font-size: 14px; transition: var(--transition); }
+        nav ul li a:hover { color: var(--odtu-red); }
+
+        /* 3. HERO (GİRİŞ) ALANI */
+        .hero {
+            padding: 100px 10% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: radial-gradient(circle at top right, rgba(211, 47, 47, 0.05), transparent);
+        }
+
+        .hero-content { flex: 1; padding-right: 50px; }
+        .hero-content h1 { font-size: 52px; line-height: 1.1; margin-bottom: 25px; font-weight: 800; }
+        .hero-content p { font-size: 18px; color: #666; margin-bottom: 35px; max-width: 550px; }
+
+        .btn-main {
+            background: var(--odtu-red);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 17px;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(211, 47, 47, 0.2);
+        }
+        .btn-main:hover { background: var(--accent-red); transform: translateY(-3px); }
+
+        .hero-image { flex: 1; text-align: right; }
+        .hero-image img { width: 100%; max-width: 450px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1)); }
+
+        /* 4. İSTATİSTİK VE ARAŞTIRMA (DETAYLI BÖLÜM) */
+        .stats-section { padding: 80px 10%; background: var(--light-gray); }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 36px; margin-bottom: 15px; }
+        .section-title p { color: #888; font-style: italic; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .stat-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--odtu-red);
+            transition: var(--transition);
+        }
+        .stat-card:hover { transform: translateY(-10px); }
+        .stat-card h3 { font-size: 45px; color: var(--odtu-red); margin-bottom: 10px; }
+        .stat-card p { font-weight: 600; color: #444; }
+        .stat-card span { font-size: 13px; color: #999; display: block; mt: 10px; }
+
+        /* 5. PROBLEM VE ÇÖZÜM DETAYLARI */
+        .details-section { padding: 100px 10%; }
+        .detail-item { display: flex; align-items: flex-start; gap: 30px; margin-bottom: 50px; }
+        .detail-icon { font-size: 40px; }
+        .detail-text h4 { font-size: 22px; margin-bottom: 10px; }
+        .detail-text p { color: #666; font-size: 16px; }
+
+        /* 6. BOT ÖZELLİKLERİ (CAMPUS & COMMUNITY) */
+        .features-dark {
+            background: var(--dark-gray);
+            color: white;
+            padding: 100px 10%;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .feature-list { list-style: none; }
+        .feature-list li {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .feature-list li strong { color: var(--odtu-red); font-size: 18px; }
+
+        /* 7. ÖRNEK DİYALOG ALANI */
+        .chat-preview {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .bubble { padding: 15px 20px; border-radius: 15px; margin-bottom: 15px; font-size: 14px; max-width: 85%; }
+        .user-b { background: #333; align-self: flex-end; margin-left: auto; border-bottom-right-radius: 2px; }
+        .bot-b { background: var(--odtu-red); border-bottom-left-radius: 2px; }
+
+        /* 8. FOOTER VE İLETİŞİM */
+        footer { padding: 80px 10% 40px; text-align: center; border-top: 1px solid #eee; }
+        .footer-cta h2 { font-size: 40px; margin-bottom: 30px; }
+        .copyright { margin-top: 60px; font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 2px; }
+
+    </style>
 </head>
-<body class="selection:bg-red-100 selection:text-red-900">
+<body>
 
-    <nav class="fixed top-0 w-full z-50 glass">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="odtu-amblem.png" class="h-10 w-auto" alt="Logo">
-                <span class="heading-font font-800 text-xl tracking-tight uppercase">METU<span class="text-[#D32F2F]">bot</span></span>
+    <header>
+        <div class="logo">METU<span>bot</span></div>
+        <nav>
+            <ul>
+                <li><a href="#istatistik">Araştırma</a></li>
+                <li><a href="#problem">Sorunlar</a></li>
+                <li><a href="#ozellikler">Özellikler</a></li>
+                <li><a href="chat.html" style="color: var(--odtu-red)">Demo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Üniversitede Bilgiye Ulaşmanın En <span style="color: var(--odtu-red)">Akıllı</span> Yolu</h1>
+            <p>METUbot, yönetmelik bilgisinden kampüs etkinliklerine kadar her şeyi saniyeler içinde cevaplayan ODTÜ odaklı bir yapay zeka asistanıdır.</p>
+            <a href="chat.html" class="btn-main">Erken Erişim İste</a>
+        </div>
+        <div class="hero-image">
+            <img src="odtu-amblem.png" alt="ODTÜ Logo">
+        </div>
+    </section>
+
+    <section id="istatistik" class="stats-section">
+        <div class="section-title">
+            <h2>Pazar Araştırması Sonuçları</h2>
+            <p>31 üniversite ve 45'ten fazla bölümden elde edilen verilerle hazırlandı.</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>88</h3>
+                <p>Katılımcı Sayısı</p>
+                <span>Anketimize katılan aktif öğrenci sayısı</span>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium opacity-70">
-                <a href="#problem" class="hover:text-[#D32F2F] transition-colors">Sorun</a>
-                <a href="#features" class="hover:text-[#D32F2F] transition-colors">Özellikler</a>
-                <a href="#pricing" class="hover:text-[#D32F2F] transition-colors">Fiyatlar</a>
-                <a href="chat.html" class="btn-premium text-white px-6 py-2.5 rounded-full shadow-lg shadow-red-500/20">Hemen Dene</a>
+            <div class="stat-card">
+                <h3>%56.8</h3>
+                <p>Zaman Kaybı</p>
+                <span>Cevap ararken 20 dakikadan fazla harcayanlar</span>
+            </div>
+            <div class="stat-card">
+                <h3>%86.4</h3>
+                <p>Yüksek Talep</p>
+                <span>AI asistanını kullanmak isteyen öğrencilerin oranı</span>
             </div>
         </div>
-    </nav>
+    </section>
 
-    <section class="relative pt-32 pb-20 overflow-hidden hero-gradient">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <section id="problem" class="details-section">
+        <div class="detail-item">
+            <div class="detail-icon">📄</div>
+            <div class="detail-text">
+                <h4>500+ Sayfalık Yönetmelik Karmaşası</h4>
+                <p>Öğrenciler akademik haklarını ararken yüzlerce sayfalık PDF dosyaları arasında kayboluyor. METUbot bu belgeleri saniyeler içinde tarayarak net madde referansları verir.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon">📢</div>
+            <div class="detail-text">
+                <h4>Dağınık Duyuru Kanalları</h4>
+                <p>Öğrencilerin %68.2'si okul duyurularını takip edemediğini belirtiyor. Bölüm sayfaları, topluluk WhatsApp grupları ve dekanlık duyuruları artık tek bir merkezde.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon">⚡</div>
+            <div class="detail-text" style="background: #fff5f5; padding: 25px; border-radius: 15px;">
+                <h4 style="color: var(--odtu-red)">3 Saniyede Çözüm</h4>
+                <p>Amacımız, bilgiye ulaşma süresini ortalama 20 dakikadan 3 saniyeye indirmektir. RAG (Retrieval-Augmented Generation) teknolojisi ile en güncel verilere güvenli erişim.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ozellikler" class="features-dark">
+        <div class="features-grid">
             <div>
-                <div class="inline-block px-4 py-1.5 rounded-full bg-red-50 text-[#D32F2F] text-xs font-bold tracking-widest uppercase mb-6">
-                    Erken Erişim Açık
-                </div>
-                <h1 class="heading-font text-6xl lg:text-7xl leading-[1.1] mb-8 font-800 tracking-tight">
-                    Üniversitede bilgiye ulaşmak artık <span class="text-[#D32F2F]">3 saniye</span> sürer
-                </h1>
-                <p class="text-lg text-gray-500 leading-relaxed mb-10 max-w-lg">
-                    Araştırmamıza katılan öğrencilerin %56.8'i bir sorunun cevabını bulmak için 20 dakikadan fazla harcıyor. METUbot, yönetmelik bilgisine anında erişim sağlayan AI asistanınızdır.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="chat.html" class="btn-premium text-white px-10 py-4 rounded-2xl font-bold text-lg">
-                        Hemen Başla
-                    </a>
-                    <a href="#how" class="px-10 py-4 rounded-2xl font-bold text-lg border border-gray-200 hover:bg-gray-50 transition-all">
-                        Nasıl Çalışır?
-                    </a>
-                </div>
-                
-                <div class="mt-16 flex gap-12 border-t border-gray-100 pt-10">
-                    <div>
-                        <div class="text-3xl font-bold">88</div>
-                        <div class="text-xs uppercase tracking-widest text-gray-400 mt-1">Anket Katılımcı</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold">%86.4</div>
-                        <div class="text-xs uppercase tracking-widest text-gray-400 mt-1">AI İsteyen Oranı</div>
-                    </div>
-                </div>
+                <h2 style="font-size: 32px; margin-bottom: 30px;">METUbot Neler Sunuyor?</h2>
+                <ul class="feature-list">
+                    <li><strong>CampusBot:</strong> Akademik takvim, yönetmelikler, ders kayıtları ve notlandırma kuralları.</li>
+                    <li><strong>CommunityBot:</strong> Öğrenci toplulukları, etkinlik takvimleri ve kampüs sosyal yaşam rehberi.</li>
+                    <li><strong>Hata Payı Sıfır:</strong> Sadece resmi kaynaklardan beslenen, uydurma bilgi üretmeyen yapı.</li>
+                    <li><strong>7/24 Erişim:</strong> Sınav dönemlerinde veya kayıt haftasında her an yanınızda.</li>
+                </ul>
             </div>
-
-            <div class="relative float">
-                <div class="bg-white rounded-[2.5rem] shadow-2xl p-4 border border-gray-100">
-                    <div class="bg-gray-50 rounded-[2rem] overflow-hidden p-6 min-h-[400px] flex flex-col justify-end">
-                        <div class="space-y-4">
-                            <div class="bg-white p-4 rounded-2xl rounded-bl-none shadow-sm max-w-[80%] border border-gray-100">
-                                <p class="text-sm font-semibold text-[#D32F2F] mb-1 italic">METUbot</p>
-                                <p class="text-sm text-gray-600 leading-relaxed">FF aldıysan dersi tekrar alabilir veya danışmanınla görüşebilirsin. Kaynak: Madde 27/b</p>
-                            </div>
-                            <div class="bg-[#D32F2F] text-white p-4 rounded-2xl rounded-br-none self-end ml-auto max-w-[70%]">
-                                <p class="text-sm">FF aldım, ne yapabilirim?</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-red-50 rounded-full blur-3xl opacity-50"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="problem" class="py-24 bg-[#121212] text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-2xl mb-20">
-                <h2 class="heading-font text-4xl font-800 mb-6 italic">Bilgiye ulaşmak neden bu kadar zor?</h2>
-                <p class="text-gray-400 text-lg">31 üniversite ve 45'ten fazla bölümden gelen veriler, dijital kampüs deneyiminin iyileşmesi gerektiğini söylüyor.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                    <div class="text-3xl mb-6">📄</div>
-                    <h4 class="font-bold mb-3 text-lg">500+ Sayfa Yönetmelik</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">Öğrencilerin %56.8'i tek bir cevap için 20 dakikadan fazla harcıyor.</p>
-                </div>
-                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                    <div class="text-3xl mb-6">🔔</div>
-                    <h4 class="font-bold mb-3 text-lg">Kaçırılan Duyurular</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">Öğrencilerin %68'i duyuruları düzenli takip edemiyor.</p>
-                </div>
-                <div class="p-8 rounded-3xl bg-[#D32F2F] text-white lg:col-span-2">
-                    <h4 class="heading-font text-2xl font-800 mb-4 italic">💡 METUbot Çözümü</h4>
-                    <p class="mb-6 opacity-90">Tüm süreçleri 3 saniyeye indiren, ODTÜ odaklı yapay zeka deneyimi.</p>
-                    <div class="flex items-center gap-4 text-sm font-bold">
-                        <span class="px-4 py-2 bg-black/20 rounded-full">✓ CampusBot</span>
-                        <span class="px-4 py-2 bg-black/20 rounded-full">✓ Akıllı Bildirim</span>
-                    </div>
+            <div class="chat-preview">
+                <div style="display: flex; flex-direction: column;">
+                    <div class="bubble user-b">FF aldığım dersi yükseltmek için ne yapmalıyım?</div>
+                    <div class="bubble bot-b">Yönetmelik Madde 27/b'ye göre: FF aldığınız dersi açıldığı ilk dönem tekrar almanız zorunludur. Eğer ders seçmeli ise yerine başka bir ders saydırabilirsiniz.</div>
+                    <div class="bubble user-b">Peki ortalamam kaç olmalı?</div>
+                    <div class="bubble bot-b">Genel not ortalamasının 2.00 altına düşmesi durumunda akademik başarı durumu "Sınamalı" olarak güncellenir.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 text-center">
-        <div class="max-w-3xl mx-auto px-6">
-            <h2 class="heading-font text-5xl font-800 mb-8 tracking-tight italic">Hızlanmaya hazır mısın?</h2>
-            <a href="chat.html" class="btn-premium text-white px-12 py-5 rounded-[2rem] font-bold text-xl inline-block">
-                METUbot'u Ücretsiz Dene
-            </a>
-            <p class="mt-8 text-gray-400 text-sm italic">Beta sürümü tüm ODTÜlüler için sınırlı süreliğine ücretsizdir.</p>
+    <footer>
+        <div class="footer-cta">
+            <h2>Geleceğin Kampüsüne Katılın</h2>
+            <a href="chat.html" class="btn-main">Erken Erişim İste</a>
+            <p style="margin-top: 25px; color: #888; font-size: 14px;">METUbot Projesi — lucythehacker tarafından geliştirilmektedir.</p>
         </div>
-    </section>
-
-    <footer class="py-12 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex items-center gap-3">
-                <img src="odtu-amblem.png" class="h-6 opacity-50 grayscale hover:grayscale-0 transition-all" alt="Logo">
-                <span class="text-sm font-bold opacity-30 italic">© 2026 METUbot Project</span>
-            </div>
-            <div class="flex gap-8 text-xs font-bold tracking-widest uppercase opacity-40">
-                <a href="#">Gizlilik</a>
-                <a href="#">Kullanım</a>
-                <a href="mailto:hello@metubot.co">İletişim</a>
-            </div>
+        <div class="copyright">
+            © 2026 Middle East Technical University — AI Assistant Project
         </div>
     </footer>
 
