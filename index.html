@@ -16,9 +16,12 @@
 
     <header class="odtu-red text-white p-4 shadow-lg flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <div class="bg-white p-1 rounded-full w-10 h-10 flex items-center justify-center shadow-md">
-                <svg viewBox="0 0 100 100" class="w-8 h-8 text-[#D32F2F]">
-                    <path fill="currentColor" d="M50 10 C 25 10, 10 40, 10 70 C 10 85, 25 90, 35 85 C 45 80, 48 65, 48 55 L 52 55 C 52 65, 55 80, 65 85 C 75 90, 90 85, 90 70 C 90 40, 75 10, 50 10 Z M 50 25 C 65 25, 75 45, 75 65 C 75 75, 70 78, 65 77 C 60 76, 58 68, 58 60 L 42 60 C 42 68, 40 76, 35 77 C 30 78, 25 75, 25 65 C 25 45, 35 25, 50 25 Z" />
+            <div class="bg-white p-1 rounded-full w-12 h-12 flex items-center justify-center shadow-md">
+                <svg viewBox="0 0 100 100" class="w-10 h-10 text-[#D32F2F]">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4.5"/>
+                    <path d="M50 5 A45 45 0 0 0 50 95" fill="none" stroke="currentColor" stroke-width="4.5"/>
+                    <path d="M50 20 A30 30 0 0 1 50 80" fill="none" stroke="currentColor" stroke-width="4.5"/>
+                    <line x1="50" y1="5" x2="50" y2="95" stroke="currentColor" stroke-width="4.5"/>
                 </svg>
             </div>
             <h1 class="text-2xl font-extrabold tracking-tight">METUbot</h1>
@@ -61,7 +64,7 @@
             userInput.value = "";
 
             setTimeout(() => {
-                addMessage("Bu konu hakkında bilgi getiriyorum...", 'ai');
+                addMessage("Bu konu hakkında hemen araştırma yapıyorum...", 'ai');
             }, 1000);
         }
 
@@ -84,6 +87,7 @@
     </script>
 </body>
 </html>
+
 
 
 
